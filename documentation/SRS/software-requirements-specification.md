@@ -41,8 +41,8 @@ The following SRS contains the detail product perspective from different stakeho
 
 #### 3.1.1 Main page (MP)
 
-See Fig. 1.
-![Fig. 1.](STaskList-wireframe-prototype/Main page.png)
+See Fig. 1.  
+![Fig. 1.](./STaskList-wireframe-prototype/Main page.png)
 
 ##### 3.1.1.1 Main page folder list (MP-FL)
 
@@ -61,8 +61,8 @@ See Fig. 1.
 
 #### 3.1.2 Folder list page (FLP)
 
-See Fig. 2.
-![Fig. 2.](STaskList-wireframe-prototype/Folders List.png)
+See Fig. 2.  
+![Fig. 2.](./STaskList-wireframe-prototype/Folders List.png)
 
 - (FLP) The system shall display all the folders list.
 - (FLP-Add) The system shall allow user to add new folder.
@@ -70,23 +70,23 @@ See Fig. 2.
 
 #### 3.1.3 Folder edit page (FEP)
 
-See Fig. 3.
-![Fig. 3.](STaskList-wireframe-prototype/Folder edit.png)
+See Fig. 3.  
+![Fig. 3.](./STaskList-wireframe-prototype/Folder edit.png)
 
 - (FEP) The system shall display all folder information.
 - (FEP-Edt) The system shall allow user to edit all folder information: name, description.
 
 ##### 3.1.3.1 Folder delete (FEP-Del)
 
-See Fig. 3.1.
-![](STaskList-wireframe-prototype/Folder delete.png)
+See Fig. 3.1.  
+![Fig. 3.1.](./STaskList-wireframe-prototype/Folder delete.png)
 
 - (FEP-Del) The system shall allow user to delete folder after confirmation if folder don't have tasks.
 
 #### 3.1.4 Task edit page (TEP)
 
-See Fig. 4.
-![Fig. 4.](STaskList-wireframe-prototype/Task edit.png)
+See Fig. 4.  
+![Fig. 4.](./STaskList-wireframe-prototype/Task edit.png)
 
 - (TEP) The system shall display all task information.
 - (TEP-Edt) The system shall allow user to edit all task information: name, description, priority, folder, start date, due date.
