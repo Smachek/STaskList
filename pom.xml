@@ -16,6 +16,7 @@
     <modules>
         <module>stasklist-model</module>
         <module>stasklist-dao</module>
+        <module>stasklist-web-app</module>
     </modules>
 
     <properties>
