@@ -12,5 +12,17 @@
     <artifactId>stasklist-web-app</artifactId>
     <name>STaskList Web Application</name>
 
+    <build>
+        <plugins>
+            <!-- Jetty  -->
+            <plugin>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-maven-plugin</artifactId>
+                <configuration>
+                    <scan>1000</scan>
+                </configuration>
+            </plugin>
 
+        </plugins>
+    </build>
 </project>
