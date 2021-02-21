@@ -12,7 +12,7 @@
     <mvc:annotation-driven/>
     <mvc:resources mapping="/resources/**" location="/resources/"/>
 
-    <context:component-scan base-package="com.smachek.stasklist"/>
+    <context:component-scan base-package="com.smachek.stasklist.web_app"/>
 
     <!-- Thymeleaf -->
     <bean id="templateResolver"
