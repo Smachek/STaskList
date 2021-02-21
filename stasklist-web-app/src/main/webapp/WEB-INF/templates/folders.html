@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!--load all Fontawesome styles -->
+    <link href="../../resources/static/css/fa-all.css"
+               th:href="@{/resources/static/css/fa-all.css}"
+               rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+    <title>Tasks</title>
+</head>
+<body>
+    
+<nav class="navbar navbar-expand-md navbar-light bg-light">
+  <!-- Image and text -->
+  <a class="navbar-brand" href="tasks.html" th:href="@{/tasks}">
+      <img src="../../resources/static/img/logo.svg"
+           th:src="@{/resources/static/img/logo.svg}"
+           width="30" height="30" class="d-inline-block align-top" alt="" loading="lazy">
+      STaskList
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
+
+<div class="container-fluid">
+  <div class="row">
+    
+    <main role="main" class="col">
+        <div class="row pt-3">
+            <div class="col">
+                <h2 class="h2">Folders</h2>   
+            </div>
+            <div class="col">
+                    
+                    <a class="btn btn-primary float-right"
+                    id="button-create-folder"
+                    href="folder.html"
+                    th:href="@{/folder}"
+                    >Create folder</a>
+
+                    <a  class="btn btn-outline-primary float-right mr-2"
+                        href="tasks.html"
+                        th:href="@{/tasks}"
+                    >Back</a>
+            </div>
+        </div>
+            
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <thead class="thead-light">
+            <tr>
+              <th style="width: 65%">Folder</th>
+              <th style="width: 12%">Create date</th>
+              <th style="width: 4%"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>ALL</td>
+              <td>01.09.2020</td>
+              <td class="text-right"> 
+                   
+              </td>
+            </tr>
+            <tr>
+            <tr>
+                <td>INBOX</td>
+                <td>01.09.2020</td>
+                <td class="text-right"> 
+                     
+                </td>
+            </tr>
+            <tr>
+                <td>Personal</td>
+                <td>01.09.2020</td>
+                <td class="text-right"> 
+                      <a class="btn-outline-secondary btn-sm" 
+                        href="folder.html"
+                        th:href="@{/folder}"
+                        title="Edit folder" 
+                        data-toggle="tooltip" 
+                        data-placement="top">
+                        <i class="fas fa-pen"></i></a>
+                </td>
+            </tr>
+            <tr>
+                <td>Work</td>
+                <td>01.09.2020</td>
+                <td class="text-right"> 
+                      <a class="btn-outline-secondary btn-sm" 
+                        href="folder.html"
+                        th:href="@{/folder}"
+                        title="Edit folder" 
+                        data-toggle="tooltip" 
+                        data-placement="top">
+                        <i class="fas fa-pen"></i></a>
+                </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </main>
+  </div>
+</div>   
+
+<footer>
+  <hr/>
+  <p class="text-center">&copy; 2020</p>
+</footer>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+</body>
+</html>
