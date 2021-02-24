@@ -4,20 +4,19 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
                              http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    <packaging>pom</packaging>
 
     <groupId>com.smachek</groupId>
     <artifactId>stasklist</artifactId>
     <version>0.1</version>
-
-    <packaging>pom</packaging>
-
-    <name>STaskList Main Project</name>
 
     <modules>
         <module>stasklist-model</module>
         <module>stasklist-dao</module>
         <module>stasklist-web-app</module>
     </modules>
+
+    <name>STaskList Main Project</name>
 
     <properties>
         <java.version>1.8</java.version>

@@ -3,14 +3,24 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
                              http://maven.apache.org/maven-v4_0_0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <parent>
-  	<groupId>com.smachek</groupId>
-  	<artifactId>stasklist</artifactId>
-  	<version>0.1</version>
-  </parent>
-  <artifactId>stasklist-model</artifactId>
+    <modelVersion>4.0.0</modelVersion>
+    <packaging>jar</packaging>
 
-  <name>STaskList Model</name>
+    <parent>
+        <groupId>com.smachek</groupId>
+        <artifactId>stasklist</artifactId>
+        <version>0.1</version>
+    </parent>
+    <artifactId>stasklist-model</artifactId>
 
+    <name>STaskList Model</name>
+
+    <dependencies>
+        <!-- Test -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 </project>
