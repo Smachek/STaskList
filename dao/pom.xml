@@ -19,7 +19,6 @@
         <dependency>
             <groupId>com.smachek</groupId>
             <artifactId>model</artifactId>
-            <version>0.1</version>
         </dependency>
         <!-- Test -->
         <dependency>

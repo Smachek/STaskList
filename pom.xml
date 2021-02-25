@@ -32,12 +32,12 @@
             <!-- Local -->
             <dependency>
                 <groupId>com.smachek</groupId>
-                <artifactId>stasklist-model</artifactId>
+                <artifactId>model</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.smachek</groupId>
-                <artifactId>stasklist-dao</artifactId>
+                <artifactId>dao</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
