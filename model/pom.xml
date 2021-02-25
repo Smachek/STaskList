@@ -11,7 +11,7 @@
         <artifactId>stasklist</artifactId>
         <version>0.1</version>
     </parent>
-    <artifactId>stasklist-model</artifactId>
+    <artifactId>model</artifactId>
 
     <name>STaskList Model</name>
 

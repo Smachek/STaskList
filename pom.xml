@@ -11,9 +11,9 @@
     <version>0.1</version>
 
     <modules>
-        <module>stasklist-model</module>
-        <module>stasklist-dao</module>
-        <module>stasklist-web-app</module>
+        <module>model</module>
+        <module>dao</module>
+        <module>web-app</module>
     </modules>
 
     <name>STaskList Main Project</name>

@@ -11,14 +11,15 @@
         <artifactId>stasklist</artifactId>
         <version>0.1</version>
     </parent>
-    <artifactId>stasklist-dao</artifactId>
+    <artifactId>dao</artifactId>
 
     <name>STaskList DAO</name>
 
     <dependencies>
         <dependency>
             <groupId>com.smachek</groupId>
-            <artifactId>stasklist-model</artifactId>
+            <artifactId>model</artifactId>
+            <version>0.1</version>
         </dependency>
         <!-- Test -->
         <dependency>

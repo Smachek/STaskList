@@ -11,8 +11,8 @@
         <groupId>com.smachek</groupId>
         <version>0.1</version>
     </parent>
+    <artifactId>web-app</artifactId>
 
-    <artifactId>stasklist-web-app</artifactId>
     <name>STaskList Web Application</name>
 
     <dependencies>
