@@ -20,6 +20,15 @@
             <groupId>com.smachek</groupId>
             <artifactId>model</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.smachek</groupId>
+            <artifactId>test-db</artifactId>
+        </dependency>
+        <!-- Spring -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-beans</artifactId>
+        </dependency>
         <!-- Test -->
         <dependency>
             <groupId>junit</groupId>
