@@ -1,34 +1,37 @@
 package com.smachek.model;
 
 import java.util.Date;
+import java.util.Objects;
 
 public class Folder {
-    private Integer folderId;
-    private String folderName;
+    private Integer idFolder;
+    private String nameFolder;
     private String description;
     private Date createDate;
 
     public Folder() {
+        this.createDate = new Date();
     }
 
-    public Folder(String folderName) {
-        this.folderName = folderName;
+    public Folder(String nameFolder) {
+        this.nameFolder = nameFolder;
+        this.createDate = new Date();
     }
 
-    public Integer getFolderId() {
-        return folderId;
+    public Integer getIdFolder() {
+        return idFolder;
     }
 
-    public void setFolderId(Integer folderId) {
-        this.folderId = folderId;
+    public void setIdFolder(Integer idFolder) {
+        this.idFolder = idFolder;
     }
 
-    public String getFolderName() {
-        return folderName;
+    public String getNameFolder() {
+        return nameFolder;
     }
 
-    public void setFolderName(String folderName) {
-        this.folderName = folderName;
+    public void setNameFolder(String nameFolder) {
+        this.nameFolder = nameFolder;
     }
 
     public String getDescription() {
@@ -50,10 +53,23 @@ public class Folder {
     @Override
     public String toString() {
         return "Folder{" +
-                "folderId=" + folderId +
-                ", folderName='" + folderName + '\'' +
+                "idFolder=" + idFolder +
+                ", nameFolder='" + nameFolder + '\'' +
                 ", description='" + description + '\'' +
                 ", createDate=" + createDate +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Folder folder = (Folder) o;
+        return idFolder.equals(folder.idFolder) && nameFolder.equals(folder.nameFolder) && Objects.equals(description, folder.description) && createDate.equals(folder.createDate);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(idFolder);
     }
 }

@@ -3,9 +3,9 @@ package com.smachek.model;
 import java.util.Date;
 
 public class Task {
-    private Integer taskId;
-    private Integer folderId;
-    private String taskName;
+    private Integer idTask;
+    private Integer idFolder;
+    private String nameTask;
     private Integer priority;
     private String description;
     private Date startDate;
@@ -17,33 +17,33 @@ public class Task {
     public Task() {
     }
 
-    public Task(Integer folderId, String taskName) {
-        this.folderId = folderId;
-        this.taskName = taskName;
+    public Task(Integer idFolder, String taskName) {
+        this.idFolder = idFolder;
+        this.nameTask = taskName;
     }
 
-    public Integer getTaskId() {
-        return taskId;
+    public Integer getIdTask() {
+        return idTask;
     }
 
-    public void setTaskId(Integer taskId) {
-        this.taskId = taskId;
+    public void setIdTask(Integer idTask) {
+        this.idTask = idTask;
     }
 
-    public Integer getFolderId() {
-        return folderId;
+    public Integer getIdFolder() {
+        return idFolder;
     }
 
-    public void setFolderId(Integer folderId) {
-        this.folderId = folderId;
+    public void setIdFolder(Integer idFolder) {
+        this.idFolder = idFolder;
     }
 
-    public String getTaskName() {
-        return taskName;
+    public String getNameTask() {
+        return nameTask;
     }
 
-    public void setTaskName(String taskName) {
-        this.taskName = taskName;
+    public void setNameTask(String nameTask) {
+        this.nameTask = nameTask;
     }
 
     public Integer getPriority() {
@@ -105,9 +105,9 @@ public class Task {
     @Override
     public String toString() {
         return "Task{" +
-                "taskId=" + taskId +
-                ", folderId=" + folderId +
-                ", taskName='" + taskName + '\'' +
+                "idTask=" + idTask +
+                ", idFolder=" + idFolder +
+                ", nameTask='" + nameTask + '\'' +
                 ", priority=" + priority +
                 ", description='" + description + '\'' +
                 ", startDate=" + startDate +
