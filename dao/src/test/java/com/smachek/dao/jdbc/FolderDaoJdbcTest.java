@@ -5,6 +5,8 @@ import com.smachek.model.Folder;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.test.context.ContextConfiguration;
@@ -12,9 +14,12 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.List;
 
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath*:test-db.xml", "classpath*:test-dao.xml"})
 public class FolderDaoJdbcTest {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(FolderDaoJdbcTest.class);
 
     @Autowired
     private FolderDao folderDao;
@@ -53,6 +58,15 @@ public class FolderDaoJdbcTest {
 
         List<Folder> actualFolders = folderDao.findAll();
         Assert.assertEquals(folders.size()+1, actualFolders.size());
+    }
+
+    @Test
+    public void testLogging() {
+        LOGGER.trace("Logging trace");
+        LOGGER.debug("Logging debug");
+        LOGGER.info("Logging info");
+        LOGGER.warn("Logging warn");
+        LOGGER.error("Logging error");
     }
 
 }
