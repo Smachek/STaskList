@@ -14,6 +14,7 @@
         <module>model</module>
         <module>dao</module>
         <module>web-app</module>
+        <module>test-db</module>
     </modules>
 
     <name>STaskList Main Project</name>
@@ -22,7 +23,7 @@
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <org.springframework.version>5.1.4.RELEASE</org.springframework.version>
+        <org.springframework.version>5.2.13.RELEASE</org.springframework.version>
         <thymeleaf-spring5.version>3.0.12.RELEASE</thymeleaf-spring5.version>
     </properties>
 
@@ -38,6 +39,11 @@
             <dependency>
                 <groupId>com.smachek</groupId>
                 <artifactId>dao</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.smachek</groupId>
+                <artifactId>test-db</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
@@ -67,12 +73,23 @@
                 <artifactId>spring-webmvc</artifactId>
                 <version>${org.springframework.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-jdbc</artifactId>
+                <version>${org.springframework.version}</version>
+            </dependency>
 
             <!-- Test -->
             <dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
                 <version>4.12</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-test</artifactId>
+                <version>${org.springframework.version}</version>
                 <scope>test</scope>
             </dependency>
 
@@ -83,6 +100,13 @@
                 <version>${thymeleaf-spring5.version}</version>
             </dependency>
 
+            <!-- DB -->
+            <dependency>
+                <groupId>com.h2database</groupId>
+                <artifactId>h2</artifactId>
+                <version>1.4.200</version>
+                <scope>test</scope>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
