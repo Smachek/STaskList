@@ -4,7 +4,7 @@ DROP TABLE IF EXISTS folder;
 
 CREATE TABLE folder (
   id_folder INT PRIMARY KEY AUTO_INCREMENT
-, name_folder VARCHAR(255) NOT NULL
+, name_folder VARCHAR(255) NOT NULL UNIQUE
 , description VARCHAR(1000)
 , create_date DATE NOT NULL
 );
