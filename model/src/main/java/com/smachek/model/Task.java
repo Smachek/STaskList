@@ -1,6 +1,7 @@
 package com.smachek.model;
 
 import java.util.Date;
+import java.util.Objects;
 
 public class Task {
     private Integer idTask;
@@ -20,6 +21,7 @@ public class Task {
     public Task(Integer idFolder, String taskName) {
         this.idFolder = idFolder;
         this.nameTask = taskName;
+        this.createDate = new Date();
     }
 
     public Integer getIdTask() {
@@ -116,5 +118,18 @@ public class Task {
                 ", doneMark=" + doneMark +
                 ", doneDate=" + doneDate +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Task task = (Task) o;
+        return idTask.equals(task.idTask) && idFolder.equals(task.idFolder);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(idTask);
     }
 }
