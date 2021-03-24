@@ -12,4 +12,7 @@
     <bean id="folderDao" class="com.smachek.dao.jdbc.FolderDaoJdbc">
         <constructor-arg ref="namedParameterJdbcTemplate"/>
     </bean>
+    <bean id="taskDao" class="com.smachek.dao.jdbc.TaskDaoJdbc">
+        <constructor-arg ref="namedParameterJdbcTemplate"/>
+    </bean>
 </beans>
