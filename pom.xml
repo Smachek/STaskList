@@ -13,6 +13,7 @@
     <modules>
         <module>model</module>
         <module>dao</module>
+        <module>dao-api</module>
         <module>web-app</module>
         <module>test-db</module>
     </modules>
@@ -40,6 +41,11 @@
             <dependency>
                 <groupId>com.smachek</groupId>
                 <artifactId>dao</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.smachek</groupId>
+                <artifactId>dao-api</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
@@ -124,7 +130,6 @@
                 <groupId>com.h2database</groupId>
                 <artifactId>h2</artifactId>
                 <version>1.4.200</version>
-                <scope>test</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>
