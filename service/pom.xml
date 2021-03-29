@@ -10,18 +10,26 @@
         <version>0.1</version>
     </parent>
 
-    <artifactId>service-api</artifactId>
+    <artifactId>service</artifactId>
 
     <dependencies>
         <dependency>
             <groupId>com.smachek</groupId>
             <artifactId>model</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.smachek</groupId>
+            <artifactId>dao-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.smachek</groupId>
+            <artifactId>service-api</artifactId>
+        </dependency>
 
         <!-- Spring -->
         <dependency>
             <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
+            <artifactId>spring-tx</artifactId>
         </dependency>
     </dependencies>
 

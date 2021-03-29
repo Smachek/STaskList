@@ -12,9 +12,10 @@
 
     <modules>
         <module>test-db</module>
+        <module>model</module>
         <module>dao</module>
         <module>dao-api</module>
-        <module>model</module>
+        <module>service</module>
         <module>service-api</module>
         <module>web-app</module>
     </modules>
@@ -54,6 +55,16 @@
                 <artifactId>test-db</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.smachek</groupId>
+                <artifactId>service</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.smachek</groupId>
+                <artifactId>service-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
 
             <!-- Spring -->
             <dependency>
@@ -84,6 +95,11 @@
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-jdbc</artifactId>
+                <version>${org.springframework.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-tx</artifactId>
                 <version>${org.springframework.version}</version>
             </dependency>
 
