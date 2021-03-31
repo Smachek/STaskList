@@ -18,7 +18,7 @@ import java.time.LocalDate;
 import java.util.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath*:test-db.xml", "classpath*:test-dao.xml"})
+@ContextConfiguration(locations = {"classpath*:test-db.xml", "classpath*:test-dao.xml", "classpath*:dao.xml"})
 public class TaskDaoJdbcTest {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(TaskDaoJdbcTest.class);

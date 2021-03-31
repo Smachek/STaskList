@@ -2,6 +2,7 @@ package com.smachek.dao.jdbc;
 
 import com.smachek.dao.FolderDao;
 import com.smachek.model.Folder;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -16,19 +17,23 @@ import java.util.Optional;
 
 public class FolderDaoJdbc implements FolderDao {
 
-    private static final String SQL_GET_ALL_FOLDERS =
-            "SELECT F.ID_FOLDER, F.NAME_FOLDER, F.DESCRIPTION, F.CREATE_DATE FROM FOLDER AS F ORDER BY F.ID_FOLDER";
-    private static final String SQL_GET_FOLDER_BY_ID =
-            "SELECT F.ID_FOLDER, F.NAME_FOLDER, F.DESCRIPTION, F.CREATE_DATE FROM FOLDER AS F WHERE F.ID_FOLDER = :in_ID_FOLDER";
-    private static final String SQL_CREATE_FOLDER =
-            "INSERT INTO FOLDER (NAME_FOLDER, DESCRIPTION, CREATE_DATE) VALUES (:in_NAME_FOLDER, :in_DESCRIPTION, :in_CREATE_DATE)";
-    private static final String SQL_CHECK_FOLDER_NAME_EXIST =
-            "SELECT COUNT(NAME_FOLDER) FROM FOLDER WHERE LOWER(NAME_FOLDER) = LOWER(:in_NAME_FOLDER)";
-    private static final String SQL_UPDATE_FOLDER =
-            "UPDATE FOLDER SET NAME_FOLDER = :in_NAME_FOLDER, DESCRIPTION = :in_DESCRIPTION " +
-                    "WHERE ID_FOLDER = :in_ID_FOLDER AND LOWER(:in_NAME_FOLDER) NOT IN (SELECT LOWER(NAME_FOLDER) FROM FOLDER)";
-    private static final String SQL_DELETE_FOLDER =
-            "DELETE FROM FOLDER WHERE ID_FOLDER = :in_ID_FOLDER";
+    @Value("${folder.getAll}")
+    private String getAllSql;
+
+    @Value("${folder.getById}")
+    private String getByIdSql;
+
+    @Value("${folder.create}")
+    private String createSql;
+
+    @Value("${folder.checkNameExist}")
+    private String checkNameExistSql;
+
+    @Value("${folder.update}")
+    private String updateSql;
+
+    @Value("${folder.delete}")
+    private String deleteSql;
 
     NamedParameterJdbcTemplate namedParameterJdbcTemplate;
     RowMapper rowMapper = BeanPropertyRowMapper.newInstance(Folder.class);
@@ -39,17 +44,17 @@ public class FolderDaoJdbc implements FolderDao {
 
     @Override
     public List<Folder> findAll() {
-        return namedParameterJdbcTemplate.query(SQL_GET_ALL_FOLDERS, rowMapper);
+        return namedParameterJdbcTemplate.query(getAllSql, rowMapper);
     }
 
     @Override
     public Optional<Folder> findById(Integer idFolder) {
         SqlParameterSource sqlParameterSource = new MapSqlParameterSource("in_ID_FOLDER", idFolder);
-        return Optional.ofNullable((Folder) namedParameterJdbcTemplate.queryForObject(SQL_GET_FOLDER_BY_ID, sqlParameterSource, rowMapper));
+        return Optional.ofNullable((Folder) namedParameterJdbcTemplate.queryForObject(getByIdSql, sqlParameterSource, rowMapper));
     }
 
     private boolean isFolderNameUnique(Folder folder) {
-        return namedParameterJdbcTemplate.queryForObject(SQL_CHECK_FOLDER_NAME_EXIST,
+        return namedParameterJdbcTemplate.queryForObject(checkNameExistSql,
                 new MapSqlParameterSource("in_NAME_FOLDER", folder.getNameFolder()), Integer.class) == 0;
     }
 
@@ -63,7 +68,7 @@ public class FolderDaoJdbc implements FolderDao {
                 .addValue("in_NAME_FOLDER",folder.getNameFolder())
                 .addValue("in_DESCRIPTION", folder.getDescription())
                 .addValue("in_CREATE_DATE", folder.getCreateDate());
-        namedParameterJdbcTemplate.update(SQL_CREATE_FOLDER, sqlParameterSource, keyHolder);
+        namedParameterJdbcTemplate.update(createSql, sqlParameterSource, keyHolder);
         Integer idFolder = Objects.requireNonNull(keyHolder.getKey()).intValue();
         folder.setIdFolder(idFolder);
         return idFolder;
@@ -75,12 +80,12 @@ public class FolderDaoJdbc implements FolderDao {
                 .addValue("in_ID_FOLDER", folder.getIdFolder())
                 .addValue("in_NAME_FOLDER",folder.getNameFolder())
                 .addValue("in_DESCRIPTION", folder.getDescription());
-        return namedParameterJdbcTemplate.update(SQL_UPDATE_FOLDER, sqlParameterSource);
+        return namedParameterJdbcTemplate.update(updateSql, sqlParameterSource);
     }
 
     @Override
     public Integer delete(Integer idFolder) {
         SqlParameterSource sqlParameterSource = new MapSqlParameterSource("in_ID_FOLDER", idFolder);
-        return namedParameterJdbcTemplate.update (SQL_DELETE_FOLDER, sqlParameterSource);
+        return namedParameterJdbcTemplate.update (deleteSql, sqlParameterSource);
     }
 }
