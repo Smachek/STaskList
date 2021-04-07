@@ -4,20 +4,20 @@ import com.smachek.dao.FolderDao;
 import com.smachek.dao.TaskDao;
 import com.smachek.model.Folder;
 import com.smachek.model.Task;
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.time.LocalDate;
 import java.util.*;
 
-@RunWith(SpringJUnit4ClassRunner.class)
+@ExtendWith(SpringExtension.class)
 @ContextConfiguration(locations = {"classpath*:test-db.xml", "classpath*:test-dao.xml", "classpath*:dao.xml"})
 public class TaskDaoJdbcTest {
 
@@ -31,24 +31,25 @@ public class TaskDaoJdbcTest {
     @Test
     public void findAllTest() {
         List<Task> tasks = taskDao.findAll();
-        Assert.assertNotNull(tasks);
-        Assert.assertTrue(tasks.size() > 0);
+        Assertions.assertNotNull(tasks);
+        Assertions.assertTrue(tasks.size() > 0);
     }
 
     @Test
     public void findByIdTest(){
         List<Task> tasks = taskDao.findAll();
-        Assert.assertNotNull(tasks);
-        Assert.assertTrue(tasks.size() > 0);
+        Assertions.assertNotNull(tasks);
+        Assertions.assertTrue(tasks.size() > 0);
 
         Integer idTask = tasks.get(0).getIdTask();
         Task actualTask = taskDao.findById(idTask).get();
-        Assert.assertEquals(tasks.get(0), actualTask);
+        Assertions.assertEquals(tasks.get(0), actualTask);
     }
 
-    @Test(expected = EmptyResultDataAccessException.class)
+    @Test
     public void findByIdExceptionalTest(){
-        taskDao.findById(999).get();
+        Assertions.assertThrows(EmptyResultDataAccessException.class,
+                () -> taskDao.findById(999).get());
     }
 
     @Test
@@ -57,8 +58,8 @@ public class TaskDaoJdbcTest {
         Folder folder = folders.get(0);
 
         List<Task> tasks = taskDao.findAll();
-        Assert.assertNotNull(tasks);
-        Assert.assertTrue(tasks.size() > 0);
+        Assertions.assertNotNull(tasks);
+        Assertions.assertTrue(tasks.size() > 0);
 
         Task newTask = new Task(folder.getIdFolder(), "TASK");
         newTask.setDescription("TASK_DESCRIPTION");
@@ -68,7 +69,7 @@ public class TaskDaoJdbcTest {
         taskDao.create(newTask);
 
         List<Task> actualTasks = taskDao.findAll();
-        Assert.assertEquals(tasks.size()+1, actualTasks.size());
+        Assertions.assertEquals(tasks.size()+1, actualTasks.size());
     }
 
     @Test
@@ -77,8 +78,8 @@ public class TaskDaoJdbcTest {
         Folder folder = folders.get(0);
 
         List<Task> tasks = taskDao.findAll();
-        Assert.assertNotNull(tasks);
-        Assert.assertTrue(tasks.size() > 0);
+        Assertions.assertNotNull(tasks);
+        Assertions.assertTrue(tasks.size() > 0);
 
         Date today = java.sql.Date.valueOf(LocalDate.now());
 
@@ -94,14 +95,14 @@ public class TaskDaoJdbcTest {
         taskDao.update(task);
 
         Optional<Task> actualTask = taskDao.findById(task.getIdTask());
-        Assert.assertEquals(folder.getIdFolder(), actualTask.get().getIdFolder());
-        Assert.assertEquals("TASK_update", actualTask.get().getNameTask());
-        Assert.assertEquals("TASK_DESCRIPTION_update", actualTask.get().getDescription());
-        Assert.assertEquals((Integer) 2, actualTask.get().getPriority());
-        Assert.assertEquals(today, actualTask.get().getStartDate());
-        Assert.assertEquals(today, actualTask.get().getDueDate());
-        Assert.assertEquals(Boolean.TRUE, actualTask.get().getDoneMark());
-        Assert.assertEquals(today, actualTask.get().getDoneDate());
+        Assertions.assertEquals(folder.getIdFolder(), actualTask.get().getIdFolder());
+        Assertions.assertEquals("TASK_update", actualTask.get().getNameTask());
+        Assertions.assertEquals("TASK_DESCRIPTION_update", actualTask.get().getDescription());
+        Assertions.assertEquals((Integer) 2, actualTask.get().getPriority());
+        Assertions.assertEquals(today, actualTask.get().getStartDate());
+        Assertions.assertEquals(today, actualTask.get().getDueDate());
+        Assertions.assertEquals(Boolean.TRUE, actualTask.get().getDoneMark());
+        Assertions.assertEquals(today, actualTask.get().getDoneDate());
 
     }
 
@@ -116,8 +117,8 @@ public class TaskDaoJdbcTest {
         int deletedCount = taskDao.delete(deleteIdTask);
 
         List<Task> actualTasks = taskDao.findAll();
-        Assert.assertEquals(1, deletedCount);
-        Assert.assertEquals(tasks.size()-1, actualTasks.size());
+        Assertions.assertEquals(1, deletedCount);
+        Assertions.assertEquals(tasks.size()-1, actualTasks.size());
     }
 
 }

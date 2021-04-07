@@ -2,21 +2,21 @@ package com.smachek.dao.jdbc;
 
 import com.smachek.dao.FolderDao;
 import com.smachek.model.Folder;
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.List;
 import java.util.Optional;
 
 
-@RunWith(SpringJUnit4ClassRunner.class)
+@ExtendWith(SpringExtension.class)
 @ContextConfiguration(locations = {"classpath*:test-db.xml", "classpath*:test-dao.xml", "classpath*:dao.xml"})
 public class FolderDaoJdbcTest {
 
@@ -28,63 +28,66 @@ public class FolderDaoJdbcTest {
     @Test
     public void findAllTest() {
         List<Folder> folders = folderDao.findAll();
-        Assert.assertNotNull(folders);
-        Assert.assertTrue(folders.size() > 0);
+        Assertions.assertNotNull(folders);
+        Assertions.assertTrue(folders.size() > 0);
     }
 
     @Test
     public void findByIdTest(){
         List<Folder> folders = folderDao.findAll();
-        Assert.assertNotNull(folders);
-        Assert.assertTrue(folders.size() > 0);
+        Assertions.assertNotNull(folders);
+        Assertions.assertTrue(folders.size() > 0);
 
         Integer idFolder = folders.get(0).getIdFolder();
         Folder actualFolder = folderDao.findById(idFolder).get();
-        Assert.assertEquals(folders.get(0), actualFolder);
+        Assertions.assertEquals(folders.get(0), actualFolder);
     }
 
-    @Test(expected = EmptyResultDataAccessException.class)
+    @Test
     public void findByIdExceptionalTest(){
-        folderDao.findById(999).get();
+        Assertions.assertThrows(EmptyResultDataAccessException.class,
+                () -> folderDao.findById(999).get());
     }
 
     @Test
     public void createFolderTest() {
         List<Folder> folders = folderDao.findAll();
-        Assert.assertNotNull(folders);
-        Assert.assertTrue(folders.size() > 0);
+        Assertions.assertNotNull(folders);
+        Assertions.assertTrue(folders.size() > 0);
 
         folderDao.create(new Folder("FOLDER"));
 
         List<Folder> actualFolders = folderDao.findAll();
-        Assert.assertEquals(folders.size()+1, actualFolders.size());
+        Assertions.assertEquals(folders.size()+1, actualFolders.size());
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void createFolderWithSameNameTest() {
         List<Folder> folders = folderDao.findAll();
-        Assert.assertNotNull(folders);
-        Assert.assertTrue(folders.size() > 0);
-
-        folderDao.create(new Folder("FOLDER_SAME"));
-        folderDao.create(new Folder("FOLDER_SAME"));
+        Assertions.assertNotNull(folders);
+        Assertions.assertTrue(folders.size() > 0);
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            folderDao.create(new Folder("FOLDER_SAME"));
+            folderDao.create(new Folder("FOLDER_SAME"));
+        });
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void createFolderWithSameNameDiffCaseTest() {
         List<Folder> folders = folderDao.findAll();
-        Assert.assertNotNull(folders);
-        Assert.assertTrue(folders.size() > 0);
-
-        folderDao.create(new Folder("FOLDER_SAME"));
-        folderDao.create(new Folder("FOLDER_Same"));
+        Assertions.assertNotNull(folders);
+        Assertions.assertTrue(folders.size() > 0);
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            folderDao.create(new Folder("FOLDER_SAME"));
+            folderDao.create(new Folder("FOLDER_Same"));
+        });
     }
 
     @Test
     public void updateFolderTest() {
         List<Folder> folders = folderDao.findAll();
-        Assert.assertNotNull(folders);
-        Assert.assertTrue(folders.size() > 0);
+        Assertions.assertNotNull(folders);
+        Assertions.assertTrue(folders.size() > 0);
 
         Folder folder = folders.get(0);
         folder.setNameFolder("FOLDER_update");
@@ -92,15 +95,15 @@ public class FolderDaoJdbcTest {
         folderDao.update(folder);
 
         Optional<Folder> actualFolder = folderDao.findById(folder.getIdFolder());
-        Assert.assertEquals("FOLDER_update", actualFolder.get().getNameFolder());
-        Assert.assertEquals("FOLDER_DESCRIPTION_update", actualFolder.get().getDescription());
+        Assertions.assertEquals("FOLDER_update", actualFolder.get().getNameFolder());
+        Assertions.assertEquals("FOLDER_DESCRIPTION_update", actualFolder.get().getDescription());
     }
 
     @Test
     public void updateFolderWithSameNameTest() {
         List<Folder> folders = folderDao.findAll();
-        Assert.assertNotNull(folders);
-        Assert.assertTrue(folders.size() > 0);
+        Assertions.assertNotNull(folders);
+        Assertions.assertTrue(folders.size() > 0);
 
         Folder folder = folders.get(0);
         folder.setNameFolder(folders.get(1).getNameFolder());
@@ -115,8 +118,8 @@ public class FolderDaoJdbcTest {
         int deletedCount = folderDao.delete(deleteIdFolder);
 
         List<Folder> actualFolders = folderDao.findAll();
-        Assert.assertEquals(1, deletedCount);
-        Assert.assertEquals(folders.size()-1, actualFolders.size());
+        Assertions.assertEquals(1, deletedCount);
+        Assertions.assertEquals(folders.size()-1, actualFolders.size());
     }
 
     @Test
