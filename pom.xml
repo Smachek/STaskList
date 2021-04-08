@@ -25,11 +25,16 @@
     <properties>
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.test.result.directory>${project.build.directory}/testResult</project.test.result.directory>
+        <junit.unitTest.directory>${project.test.result.directory}/unit</junit.unitTest.directory>
+        <junit.integrationTest.directory>${project.test.result.directory}/integration</junit.integrationTest.directory>
 
         <org.springframework.version>5.2.13.RELEASE</org.springframework.version>
         <thymeleaf-spring5.version>3.0.12.RELEASE</thymeleaf-spring5.version>
         <logback.version>1.2.3</logback.version>
         <junit.version>5.7.1</junit.version>
+        <version.maven-surefire-plugin>3.0.0-M5</version.maven-surefire-plugin>
+        <version.maven-failsafe-plugin>3.0.0-M5</version.maven-failsafe-plugin>
     </properties>
 
     <dependencyManagement>
@@ -178,6 +183,43 @@
                     <version>10.0.0</version>
                     <configuration>
                         <scan>1000</scan>
+                    </configuration>
+                </plugin>
+
+                <!-- Tests -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>${version.maven-surefire-plugin}</version>
+                    <configuration>
+                        <runOrder>alphabetical</runOrder>
+                        <reportsDirectory>${junit.unitTest.directory}</reportsDirectory>
+                        <excludes>
+                            <exclude>**/*IT</exclude>
+                        </excludes>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-failsafe-plugin</artifactId>
+                    <version>${version.maven-failsafe-plugin}</version>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>integration-test</goal>
+                                <goal>verify</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                    <configuration>
+                        <runOrder>alphabetical</runOrder>
+                        <reportsDirectory>${junit.integrationTest.directory}</reportsDirectory>
+                        <argLine>
+                            --illegal-access=permit
+                        </argLine>
+                        <includes>
+                            <include>**/*IT</include>
+                        </includes>
                     </configuration>
                 </plugin>
 

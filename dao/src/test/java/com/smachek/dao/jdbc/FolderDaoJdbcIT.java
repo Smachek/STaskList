@@ -18,9 +18,9 @@ import java.util.Optional;
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(locations = {"classpath*:test-db.xml", "classpath*:test-dao.xml", "classpath*:dao.xml"})
-public class FolderDaoJdbcTest {
+public class FolderDaoJdbcIT {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(FolderDaoJdbcTest.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(FolderDaoJdbcIT.class);
 
     @Autowired
     private FolderDao folderDao;

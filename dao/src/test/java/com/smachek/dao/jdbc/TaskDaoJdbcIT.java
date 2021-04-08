@@ -19,9 +19,9 @@ import java.util.*;
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(locations = {"classpath*:test-db.xml", "classpath*:test-dao.xml", "classpath*:dao.xml"})
-public class TaskDaoJdbcTest {
+public class TaskDaoJdbcIT {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(TaskDaoJdbcTest.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(TaskDaoJdbcIT.class);
 
     @Autowired
     private TaskDao taskDao;
