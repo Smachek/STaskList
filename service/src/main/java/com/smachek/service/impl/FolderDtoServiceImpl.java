@@ -20,6 +20,6 @@ public class FolderDtoServiceImpl implements FolderDtoService {
 
     @Override
     public List<FolderDto> findAllWithTaskCount() {
-        return null;
+        return folderDtoDao.findAllWithTaskCount();
     }
 }

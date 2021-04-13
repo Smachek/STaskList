@@ -12,7 +12,47 @@
     <mvc:annotation-driven/>
     <mvc:resources mapping="/resources/**" location="/resources/"/>
 
-    <context:component-scan base-package="com.smachek.stasklist.web_app"/>
+    <context:component-scan base-package="com.smachek.*"/>
+
+    <import resource="classpath*:test-db.xml"/>
+
+    <!--    <bean class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer">-->
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:application.properties</value>
+                <value>classpath:dao.properties</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="namedParameterJdbcTemplate" class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
+        <constructor-arg ref="dataSource"/>
+    </bean>
+
+    <bean id="folderDao" class="com.smachek.dao.jdbc.FolderDaoJdbc">
+        <constructor-arg ref="namedParameterJdbcTemplate"/>
+    </bean>
+
+    <bean id="folderDtoDao" class="com.smachek.dao.jdbc.FolderDtoDaoJdbc">
+        <constructor-arg ref="namedParameterJdbcTemplate"/>
+    </bean>
+
+    <bean id="taskDao" class="com.smachek.dao.jdbc.TaskDaoJdbc">
+        <constructor-arg ref="namedParameterJdbcTemplate"/>
+    </bean>
+
+    <bean id="folderService" class="com.smachek.service.impl.FolderServiceImpl">
+        <constructor-arg name="folderDao" ref="folderDao"/>
+    </bean>
+
+    <bean id="folderDtoService" class="com.smachek.service.impl.FolderDtoServiceImpl">
+        <constructor-arg name="folderDtoDao" ref="folderDtoDao"/>
+    </bean>
+
+    <bean id="taskService" class="com.smachek.service.impl.TaskServiceImpl">
+        <constructor-arg name="taskDao" ref="taskDao"/>
+    </bean>
 
     <!-- Thymeleaf -->
     <bean id="templateResolver"
