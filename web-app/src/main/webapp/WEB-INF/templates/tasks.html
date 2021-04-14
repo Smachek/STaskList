@@ -50,19 +50,20 @@
       <div class="sidebar-sticky  pt-3">
         <h2>Folders</h2>
         <ul class="list-group">
-          <li class="list-group-item d-flex justify-content-between align-items-center">
-            INBOX
-            <span class="badge badge-primary badge-pill">1</span>
+          <li th:each="folder : ${folders}"
+              class="list-group-item d-flex justify-content-between align-items-center">
+            <span th:text="${folder.nameFolder}"> INBOX </span>
+            <span th:text="${folder.taskCount}" class="badge badge-primary badge-pill">1</span>
           </li>
-          <li class="list-group-item d-flex justify-content-between align-items-center">
+          <li th:remove="all" class="list-group-item d-flex justify-content-between align-items-center">
             ALL
             <span class="badge badge-primary badge-pill">4</span>
           </li>
-          <li class="list-group-item d-flex justify-content-between align-items-center">
+          <li th:remove="all" class="list-group-item d-flex justify-content-between align-items-center">
             Personal
             <span class="badge badge-primary badge-pill">2</span>
           </li>
-          <li class="list-group-item d-flex justify-content-between align-items-center">
+          <li th:remove="all" class="list-group-item d-flex justify-content-between align-items-center">
             Work
             <span class="badge badge-primary badge-pill">1</span>
           </li>

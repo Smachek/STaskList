@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
 public class FolderController {
@@ -27,8 +28,9 @@ public class FolderController {
         return "folders";
     }
 
-    @GetMapping(value = "/folder")
-    public final String folder(){
+    @GetMapping(value = "/folder/{id}")
+    public final String folderEdit(@PathVariable Integer id, Model model){
+        LOGGER.debug("folders()");
         return "folder";
     }
 }
