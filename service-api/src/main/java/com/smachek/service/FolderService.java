@@ -11,5 +11,7 @@ public interface FolderService {
     Integer create (Folder folder);
     Integer update (Folder folder);
     Integer delete (Integer idFolder);
+
+    Integer count();
 }
 

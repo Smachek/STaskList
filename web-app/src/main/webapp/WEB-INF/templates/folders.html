@@ -73,7 +73,7 @@
           <tbody>
             <tr th:each="folder : ${folders}">
                 <td th:text="${folder.nameFolder}">INBOX</td>
-                <td th:text="${folder.createDate}">01.09.2020</td>
+                <td th:text="${#dates.format(folder.createDate, 'yyyy-MM-dd')}">01.09.2020</td>
                 <td class="text-right">
                     <a class="btn-outline-secondary btn-sm"
                        href="folder.html"

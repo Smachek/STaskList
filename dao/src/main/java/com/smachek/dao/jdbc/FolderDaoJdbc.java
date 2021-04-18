@@ -11,6 +11,7 @@ import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -34,6 +35,9 @@ public class FolderDaoJdbc implements FolderDao {
 
     @Value("${folder.delete}")
     private String deleteSql;
+
+    @Value("${folder.count}")
+    private String countSql;
 
     NamedParameterJdbcTemplate namedParameterJdbcTemplate;
     RowMapper rowMapper = BeanPropertyRowMapper.newInstance(Folder.class);
@@ -87,5 +91,10 @@ public class FolderDaoJdbc implements FolderDao {
     public Integer delete(Integer idFolder) {
         SqlParameterSource sqlParameterSource = new MapSqlParameterSource("in_ID_FOLDER", idFolder);
         return namedParameterJdbcTemplate.update (deleteSql, sqlParameterSource);
+    }
+
+    @Override
+    public Integer count() {
+        return namedParameterJdbcTemplate.queryForObject(countSql, new HashMap<>(), Integer.class);
     }
 }

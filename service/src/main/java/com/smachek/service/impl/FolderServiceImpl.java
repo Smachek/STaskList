@@ -47,4 +47,9 @@ public class FolderServiceImpl implements FolderService {
     public Integer delete(Integer idFolder) {
         return folderDao.delete(idFolder);
     }
+
+    @Override
+    public Integer count() {
+        return folderDao.count();
+    }
 }
