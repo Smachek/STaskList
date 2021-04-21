@@ -3,6 +3,7 @@ package com.smachek.dao.jdbc;
 import com.smachek.dao.FolderDao;
 import com.smachek.model.Folder;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -54,7 +55,8 @@ public class FolderDaoJdbc implements FolderDao {
     @Override
     public Optional<Folder> findById(Integer idFolder) {
         SqlParameterSource sqlParameterSource = new MapSqlParameterSource("in_ID_FOLDER", idFolder);
-        return Optional.ofNullable((Folder) namedParameterJdbcTemplate.queryForObject(getByIdSql, sqlParameterSource, rowMapper));
+        List<Folder> results = namedParameterJdbcTemplate.query(getByIdSql, sqlParameterSource, rowMapper);
+        return Optional.ofNullable(DataAccessUtils.uniqueResult(results) );
     }
 
     private boolean isFolderNameUnique(Folder folder) {

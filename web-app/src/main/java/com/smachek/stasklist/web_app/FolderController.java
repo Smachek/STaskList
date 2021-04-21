@@ -12,10 +12,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.Optional;
+
 @Controller
 public class FolderController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(FolderController.class);
+
 
     private final FolderDtoService folderDtoService;
     private final FolderService folderService;
@@ -45,13 +48,29 @@ public class FolderController {
     @PostMapping(value = "/folder")
     public final String folderCreate(Folder folder){
         LOGGER.debug("folderCreate({})", folder);
-        this.folderService.create(folder);
+        folderService.create(folder);
         return "redirect:/folders";
     }
 
     @GetMapping(value = "/folder/{id}")
-    public final String folderEdit(@PathVariable Integer id, Model model){
-        LOGGER.debug("folderEdit()");
-        return "folder";
+    public final String folderEditPage(@PathVariable Integer id, Model model){
+        LOGGER.debug("folderEditPage({}, {})", id, model);
+        Optional<Folder> optionalFolder = folderService.findById(id);
+        if (optionalFolder.isPresent()) {
+            model.addAttribute("isNew", false);
+            model.addAttribute("folder", optionalFolder.get());
+            return "folder";
+        }
+        else {
+            // TODO folder not found - pass error message as parameter or handle not found error
+            return "redirect:folders";
+        }
+    }
+
+    @PostMapping(value = "/folder/{id}")
+    public final String folderEdit(Folder folder){
+        LOGGER.debug("folderEdit({})", folder);
+        folderService.update(folder);
+        return "redirect:/folders";
     }
 }

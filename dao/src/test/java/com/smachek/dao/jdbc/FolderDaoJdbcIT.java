@@ -45,8 +45,8 @@ public class FolderDaoJdbcIT {
 
     @Test
     public void findByIdExceptionalTest(){
-        Assertions.assertThrows(EmptyResultDataAccessException.class,
-                () -> folderDao.findById(999).get());
+        Optional<Folder> optionalFolder = folderDao.findById(999);
+        Assertions.assertTrue (optionalFolder.isEmpty());
     }
 
     @Test

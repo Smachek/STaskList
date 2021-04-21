@@ -14,12 +14,6 @@
 
     <logger name="com.smachek" level="DEBUG">
         <appender-ref ref="STDOUT"/>
-<!--        <appender-ref ref="FILE"/>-->
     </logger>
 
-<!--
-    <root level="DEBUG">
-        <appender-ref ref="STDOUT"/>
-    </root>
--->
 </configuration>
