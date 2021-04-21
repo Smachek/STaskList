@@ -25,7 +25,7 @@ CREATE TABLE TASK (
 
 -- folder
 INSERT INTO FOLDER VALUES(0, 'INBOX', 'For new tasks', DATE '2020-01-01');
-INSERT INTO FOLDER VALUES(1, 'ALL', 'All tasks', DATE '2020-01-01');
+INSERT INTO FOLDER VALUES(1, 'Study', 'Learning something', DATE '2020-01-01');
 INSERT INTO FOLDER VALUES(2, 'Personal', 'For personal tasks', DATE '2020-01-01');
 INSERT INTO FOLDER VALUES(3, 'Work', 'For work tasks', DATE '2020-01-01');
 
