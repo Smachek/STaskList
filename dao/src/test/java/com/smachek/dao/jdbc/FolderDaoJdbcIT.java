@@ -122,13 +122,4 @@ public class FolderDaoJdbcIT {
         Assertions.assertEquals(folders.size()-1, actualFolders.size());
     }
 
-    @Test
-    public void testLogging() {
-        LOGGER.trace("Logging trace");
-        LOGGER.debug("Logging debug");
-        LOGGER.info("Logging info");
-        LOGGER.warn("Logging warn");
-        LOGGER.error("Logging error");
-    }
-
 }
