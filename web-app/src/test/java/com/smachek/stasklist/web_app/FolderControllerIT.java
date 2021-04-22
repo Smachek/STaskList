@@ -180,6 +180,19 @@ class FolderControllerIT {
         Optional<Folder> optionalFolder = folderService.findById (1);
         assertEquals(testDescription, optionalFolder.get().getDescription());
     }
+
+    @Test
+    public void shouldDeleteFolder() throws Exception {
+        Integer countBefore = folderService.count();
+        mockMvc.perform(
+                MockMvcRequestBuilders.get("/folder/1/delete")
+        ).andExpect(status().isFound())
+                .andExpect(view().name("redirect:/folders"))
+                .andExpect(redirectedUrl("/folders"));
+        // verify database size
+        Integer countAfter = folderService.count();
+        assertEquals(countBefore - 1, countAfter);
+    }
 }
 
 

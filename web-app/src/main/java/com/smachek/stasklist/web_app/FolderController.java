@@ -73,4 +73,11 @@ public class FolderController {
         folderService.update(folder);
         return "redirect:/folders";
     }
+
+    @GetMapping(value = "/folder/{id}/delete")
+    public final String folderDeleteById(@PathVariable Integer id){
+        LOGGER.debug("folderDeleteById({})", id);
+        folderService.delete(id);
+        return "redirect:/folders";
+    }
 }
