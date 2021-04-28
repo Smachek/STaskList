@@ -12,12 +12,14 @@ General characteristics of the application:
 - Multi module Maven project
 - Multi layer app (Model, DAO, DTO, Service, Web-app)
 - Unit tests, integration test, mock
+- Logging
 
 ### Used technology
 
 - Java 8
 - Spring 5 (Core, MVC, Test)
 - JUnit 5
+- Logback 1.2.3
 - Maven 3.6.3
 - Jetty 10.0.2
 - H2 test database
