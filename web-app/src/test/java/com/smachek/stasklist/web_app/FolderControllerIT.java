@@ -3,6 +3,8 @@ package com.smachek.stasklist.web_app;
 import com.smachek.model.Folder;
 import com.smachek.service.FolderService;
 import org.apache.commons.lang3.RandomStringUtils;
+
+import org.exparity.hamcrest.date.DateMatchers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -49,6 +51,8 @@ class FolderControllerIT {
 
     @Test
     public void shouldReturnFoldersPage() throws Exception {
+        Date date = new SimpleDateFormat("yyyy-MM-dd").parse("2020-01-01");  ;
+
         mockMvc.perform(
                 MockMvcRequestBuilders.get("/folders")
         ).andDo(MockMvcResultHandlers.print())
@@ -60,14 +64,16 @@ class FolderControllerIT {
                                 hasProperty("idFolder", is(0)),
                                 hasProperty("nameFolder", is("INBOX")),
                                 hasProperty("description", is("For new tasks")),
+                                hasProperty("createDate", DateMatchers.sameDay(date)),
                                 hasProperty("taskCount", is(1))
                         )
                 )))
                 .andExpect(model().attribute("folders", hasItem(
                         allOf(
                                 hasProperty("idFolder", is(1)),
-                                hasProperty("nameFolder", is("ALL")),
-                                hasProperty("description", is("All tasks")),
+                                hasProperty("nameFolder", is("Study")),
+                                hasProperty("description", is("Learning something")),
+                                hasProperty("createDate", DateMatchers.sameDay(date)),
                                 hasProperty("taskCount", is(0))
                         )
                 )))
@@ -76,6 +82,7 @@ class FolderControllerIT {
                                 hasProperty("idFolder", is(2)),
                                 hasProperty("nameFolder", is("Personal")),
                                 hasProperty("description", is("For personal tasks")),
+                                hasProperty("createDate", DateMatchers.sameDay(date)),
                                 hasProperty("taskCount", is(2))
                         )
                 )))
@@ -84,6 +91,7 @@ class FolderControllerIT {
                                 hasProperty("idFolder", is(3)),
                                 hasProperty("nameFolder", is("Work")),
                                 hasProperty("description", is("For work tasks")),
+                                hasProperty("createDate", DateMatchers.sameDay(date)),
                                 hasProperty("taskCount", is(1))
                         )
                 )));
