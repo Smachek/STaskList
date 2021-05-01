@@ -44,11 +44,24 @@
             <div class="col">
                 <div class="card">
                     <div class="card-body">
-                        <H2>Task</H2>
-                        <form>
+                        <H2 th:text="${isNew} ? 'Create task' : 'Edit task'">Task</H2>
+                        <form id = "taskForm"
+                            action="tasks.html"
+                            th:object="${task}"
+                            th:action="@{${#httpServletRequest.servletPath}}"
+                            th:method="@{post}">
+                            <input id="field_idTask"
+                                   type="hidden"
+                                   th:field="*{idTask}">
                             <div class="form-group form-check">
-                                <input class="form-check-input" type="checkbox" id="priorityCheck">
-                                <label class="form-check-label" for="priorityCheck">
+                                <input type="checkbox"
+                                       th:checked="*{priority}==1"
+                                       th:value="*{priority}"
+                                       onclick="this.value = this.checked ? 1 : 0"
+                                       class="form-check-input"
+                                       id="priority"
+                                       name="priority">
+                                <label class="form-check-label" for="priority">
                                 Priority
                                 </label>
                             </div>
@@ -57,13 +70,14 @@
                                 <input type="text" 
                                     class="form-control"
                                     id="field_taskName"
-                                    value="Another task"/>
+                                    value="Another task"
+                                    th:field="*{nameTask}"/>
                             </div>
                             <div class="form-group">
                                 <label for="field_folder">Folder</label>
-                                <select class="form-control" id="field_folder">
+                                <select th:field="*{idFolder}" class="form-control" id="field_folder">
                                     <option value="0">INBOX</option>
-                                    <option value="1">ALL</option>
+                                    <option value="1">Study</option>
                                     <option value="2">Personal</option>
                                     <option value="3">Work</option>
                                 </select>
@@ -73,29 +87,35 @@
                                   <label for="field_startDate">
                                         Start date
                                   </label>
-                                  <input type="text" id="field_startDate"
+                                  <input type="date" id="field_startDate"
                                     class="form-control" 
-                                    value="02.09.2020">
+                                    value="02.09.2020"
+                                    th:field="*{startDate}"
+                                    >
                                 </div>
                                 <div class="form-group col">
                                     <label for="field_dueDate">
                                         Due date
                                     </label>  
-                                  <input type="text" id="field_dueDate"
+                                  <input type="date" id="field_dueDate"
                                     class="form-control" 
-                                    value="10.09.2020">
+                                    value="10.09.2020"
+                                    th:field="*{dueDate}"
+                                  >
                                 </div>
                             </div>
                             
                             <div class="form-group">
                                 <label for="fieldDescription">Description</label>
-                                <textarea class="form-control" id="fieldDescription" rows="3"></textarea>
+                                <textarea class="form-control" id="fieldDescription" rows="3"
+                                    th:field="*{description}"></textarea>
                             </div>
 
                             <div class="row">
                                 <div class="col">
                                     <a href="tasks.html"
                                        th:href="@{/tasks}"
+                                       th:onclick="@{document.forms['taskForm'].submit(); return false;}"
                                         class="btn btn-primary">
                                         <i class="d-none d-sm-inline fas fa-save"></i> Save</a>
                             

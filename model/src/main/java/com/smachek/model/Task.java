@@ -1,5 +1,7 @@
 package com.smachek.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 import java.util.Objects;
 
@@ -9,19 +11,26 @@ public class Task {
     private String nameTask;
     private Integer priority;
     private String description;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date startDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dueDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date createDate;
     private Boolean doneMark;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date doneDate;
 
     public Task() {
+        this.createDate = new Date();
+        this.priority = 0;
     }
 
     public Task(Integer idFolder, String taskName) {
         this.idFolder = idFolder;
         this.nameTask = taskName;
         this.createDate = new Date();
+        this.priority = 0;
     }
 
     public Integer getIdTask() {

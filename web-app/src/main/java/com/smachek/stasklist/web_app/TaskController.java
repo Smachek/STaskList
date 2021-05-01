@@ -1,5 +1,6 @@
 package com.smachek.stasklist.web_app;
 
+import com.smachek.model.Task;
 import com.smachek.service.FolderDtoService;
 import com.smachek.service.TaskService;
 import org.slf4j.Logger;
@@ -7,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class TaskController {
@@ -30,8 +32,18 @@ public class TaskController {
     }
 
     @GetMapping(value = "/task")
-    public final String task(Model model){
+    public final String taskCreatePage(Model model){
+        LOGGER.debug("taskCreatePage ({})", model);
+        model.addAttribute("isNew", true);
+        model.addAttribute("task", new Task());
         return "task";
+    }
+
+    @PostMapping(value = "/task")
+    public final String taskCreate(Task task){
+        LOGGER.debug("taskCreate({})", task);
+        taskService.create(task);
+        return "redirect:/tasks";
     }
 
 }

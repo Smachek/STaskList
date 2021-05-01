@@ -121,7 +121,7 @@ public class TaskControllerIT {
                         )
                 )));
     }
-/*
+
     @Test
     public void shouldReturnCreateTaskPage() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.get("/task"))
@@ -139,8 +139,12 @@ public class TaskControllerIT {
         mockMvc.perform(
                 MockMvcRequestBuilders.post("/task")
                         .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-                        .param("nameTask", "TEST FOLDER")
+                        .param("idFolder", "0")
+                        .param("nameTask", "TEST TASK")
                         .param("description", "test task DESCRIPTION")
+                        .param("priority", "1")
+                        .param("startDate", "2021-05-01")
+                        .param("dueDate", "2021-05-08")
         ).andExpect(status().isFound())
                 .andExpect(view().name("redirect:/tasks"))
                 .andExpect(redirectedUrl("/tasks"));
@@ -148,7 +152,7 @@ public class TaskControllerIT {
         Integer countAfter = taskService.count();
         assertEquals(countBefore + 1, countAfter);
     }
-
+/*
     @Test
     public void shouldOpenEditTaskPageById() throws Exception {
 

@@ -11,6 +11,7 @@ import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -31,6 +32,9 @@ public class TaskDaoJdbc implements TaskDao {
 
     @Value("${task.delete}")
     private String deleteSql;
+
+    @Value("${task.count}")
+    private String countSql;
 
     NamedParameterJdbcTemplate namedParameterJdbcTemplate;
     RowMapper rowMapper = BeanPropertyRowMapper.newInstance(Task.class);
@@ -86,6 +90,11 @@ public class TaskDaoJdbc implements TaskDao {
     public Integer delete(Integer idTask) {
         SqlParameterSource sqlParameterSource = new MapSqlParameterSource("in_ID_TASK", idTask);
         return namedParameterJdbcTemplate.update (deleteSql, sqlParameterSource);
+    }
+
+    @Override
+    public Integer count() {
+        return namedParameterJdbcTemplate.queryForObject(countSql, new HashMap<>(), Integer.class);
     }
 
 }

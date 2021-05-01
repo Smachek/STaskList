@@ -45,4 +45,9 @@ public class TaskServiceImpl implements TaskService {
     public Integer delete(Integer idTask) {
         return taskDao.delete(idTask);
     }
+
+    @Override
+    public Integer count() {
+        return taskDao.count();
+    }
 }

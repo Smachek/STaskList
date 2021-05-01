@@ -11,4 +11,6 @@ public interface TaskService {
     Integer create (Task task);
     Integer update (Task task);
     Integer delete (Integer idTask);
+
+    Integer count();
 }
