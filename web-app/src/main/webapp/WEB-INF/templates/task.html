@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <!-- Required meta tags -->
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!--load all Fontawesome styles -->
@@ -10,7 +10,14 @@
           th:href="@{/resources/static/css/fa-all.css}"
           rel="stylesheet">
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet"
+          href="../../resources/static/css/bootstrap-datepicker.css"
+          th:href="@{resources/static/css/bootstrap-datepicker.css}"/>
+    <link rel="stylesheet"
+          href="../../resources/static/css/bootstrap-datepicker.standalone.css"
+          th:href="@{resources/static/css/bootstrap-datepicker.standalone.css}"/>
 
     <title>Task</title>
 </head>
@@ -84,24 +91,32 @@
                             </div>
                             <div class="row">
                                 <div class="form-group col">
-                                  <label for="field_startDate">
+                                    <label for="field_startDate">
                                         Start date
-                                  </label>
-                                  <input type="date" id="field_startDate"
-                                    class="form-control" 
-                                    value="02.09.2020"
-                                    th:field="*{startDate}"
-                                    >
+                                    </label>
+                                    <div class="input-group date" data-date-format="yyyy/mm/dd">
+                                        <input type="text" id="field_startDate"
+                                            class="form-control"
+                                            value="02.09.2020"
+                                            th:field="*{startDate}">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                            </div>
+                                    </div>
                                 </div>
                                 <div class="form-group col">
                                     <label for="field_dueDate">
                                         Due date
-                                    </label>  
-                                  <input type="date" id="field_dueDate"
-                                    class="form-control" 
-                                    value="10.09.2020"
-                                    th:field="*{dueDate}"
-                                  >
+                                    </label>
+                                    <div class="input-group date" data-date-format="yyyy/mm/dd">
+                                        <input type="text" id="field_dueDate"
+                                               class="form-control"
+                                               value="10.09.2020"
+                                               th:field="*{dueDate}">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             
@@ -172,5 +187,16 @@
 <script src="../../resources/static/js/jquery-3.6.0.slim.min.js" th:src="@{/resources/static/js/jquery-3.6.0.slim.min.js}"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+<script src="../../resources/static/js/bootstrap-datepicker.js" th:src="@{resources/static/js/bootstrap-datepicker.js}"></script>
+<script src="../../resources/static/js/bootstrap-datepicker.ru.min.js"
+        th:src="@{resources/static/js/bootstrap-datepicker.ru.min.js}"
+        charset="UTF-8"></script>
+<script>
+    $('.input-group.date').datepicker({
+        language: 'ru',
+        autoclose: true,
+        todayHighlight: true
+    });
+</script>
 </body>
 </html>

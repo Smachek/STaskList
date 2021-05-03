@@ -11,14 +11,14 @@ public class Task {
     private String nameTask;
     private Integer priority;
     private String description;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy/MM/dd")
     private Date startDate;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy/MM/dd")
     private Date dueDate;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy/MM/dd")
     private Date createDate;
     private Boolean doneMark;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy/MM/dd")
     private Date doneDate;
 
     public Task() {
