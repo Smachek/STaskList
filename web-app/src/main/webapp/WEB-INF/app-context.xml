@@ -69,6 +69,7 @@
         <property name="templateEngine" ref="templateEngine"/>
         <property name="order" value="1"/>
         <property name="viewNames" value="*"/>
+        <property name="characterEncoding" value="UTF-8"/>
     </bean>
 
 </beans>
