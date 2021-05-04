@@ -1,5 +1,7 @@
 package com.smachek.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 import java.util.Objects;
 
@@ -7,6 +9,7 @@ public class Folder {
     private Integer idFolder;
     private String nameFolder;
     private String description;
+    @DateTimeFormat(pattern = "yyyy/MM/dd")
     private Date createDate;
 
     public Folder() {
