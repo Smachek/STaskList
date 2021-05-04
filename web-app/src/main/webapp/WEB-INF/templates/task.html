@@ -83,10 +83,10 @@
                             <div class="form-group">
                                 <label for="field_folder">Folder</label>
                                 <select th:field="*{idFolder}" class="form-control" id="field_folder">
-                                    <option value="0">INBOX</option>
-                                    <option value="1">Study</option>
-                                    <option value="2">Personal</option>
-                                    <option value="3">Work</option>
+                                    <option th:each="folder : ${folders}"
+                                            th:value="${folder.idFolder}"
+                                            th:text="${folder.nameFolder}">
+                                    </option>
                                 </select>
                             </div>
                             <div class="row">

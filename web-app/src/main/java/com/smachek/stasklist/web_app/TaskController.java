@@ -36,6 +36,7 @@ public class TaskController {
         LOGGER.debug("taskCreatePage ({})", model);
         model.addAttribute("isNew", true);
         model.addAttribute("task", new Task());
+        model.addAttribute("folders", folderDtoService.findAllWithTaskCount() );
         return "task";
     }
 
