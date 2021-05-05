@@ -22,13 +22,11 @@ import org.springframework.web.context.WebApplicationContext;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Optional;
 
 import static com.smachek.model.constants.TaskConstants.*;
 import static org.hamcrest.Matchers.*;
 import static org.hamcrest.Matchers.comparesEqualTo;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @ExtendWith(SpringExtension.class)
@@ -143,8 +141,8 @@ public class TaskControllerIT {
                         .param("nameTask", "TEST TASK")
                         .param("description", "test task DESCRIPTION")
                         .param("priority", "1")
-                        .param("startDate", "2021-05-01")
-                        .param("dueDate", "2021-05-08")
+                        .param("startDate", "2021/05/01")
+                        .param("dueDate", "2021/05/08")
         ).andExpect(status().isFound())
                 .andExpect(view().name("redirect:/tasks"))
                 .andExpect(redirectedUrl("/tasks"));
@@ -152,24 +150,31 @@ public class TaskControllerIT {
         Integer countAfter = taskService.count();
         assertEquals(countBefore + 1, countAfter);
     }
-/*
+
     @Test
     public void shouldOpenEditTaskPageById() throws Exception {
 
-        Date taskCreateDate = new SimpleDateFormat("yyyy-MM-dd").parse("2020-01-01");
+        Date taskStartDate = new SimpleDateFormat("yyyy-MM-dd").parse("2020-09-01");
+        Date taskDueDate = new SimpleDateFormat("yyyy-MM-dd").parse("2020-09-10");
+        Date taskCreateDate = new SimpleDateFormat("yyyy-MM-dd").parse("2020-09-01");
         mockMvc.perform(
-                MockMvcRequestBuilders.get("/task/0")
+                MockMvcRequestBuilders.get("/task/1")
         ).andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentType("text/html;charset=UTF-8"))
                 .andExpect(view().name("task"))
                 .andExpect(model().attribute("isNew",is(false)))
-                .andExpect(model().attribute("task", hasProperty("idTask", is(0))))
-                .andExpect(model().attribute("task", hasProperty("nameTask", is("INBOX"))))
-                .andExpect(model().attribute("task", hasProperty("description", is("For new tasks"))))
-                .andExpect(model().attribute("task", hasProperty("createDate", comparesEqualTo(taskCreateDate))));
+                .andExpect(model().attribute("task", hasProperty("idTask", is(1))))
+                .andExpect(model().attribute("task", hasProperty("idFolder", is(0))))
+                .andExpect(model().attribute("task", hasProperty("nameTask", is("Do something till tomorrow"))))
+                .andExpect(model().attribute("task", hasProperty("priority", is(0))))
+                .andExpect(model().attribute("task", hasProperty("description", is("Description do something."))))
+                .andExpect(model().attribute("task", hasProperty("startDate", comparesEqualTo(taskStartDate))))
+                .andExpect(model().attribute("task", hasProperty("dueDate", comparesEqualTo(taskDueDate))))
+                .andExpect(model().attribute("task", hasProperty("createDate", comparesEqualTo(taskCreateDate))))
+                .andExpect(model().attribute("task", hasProperty("doneMark", is(false))));
     }
-
+/*
     @Test
     public void shouldRedirectToTaskPageIfTaskNotFoundById() throws Exception {
         mockMvc.perform(

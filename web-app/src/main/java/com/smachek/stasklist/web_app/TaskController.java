@@ -8,7 +8,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.Optional;
 
 @Controller
 public class TaskController {
@@ -45,6 +48,22 @@ public class TaskController {
         LOGGER.debug("taskCreate({})", task);
         taskService.create(task);
         return "redirect:/tasks";
+    }
+
+    @GetMapping(value = "/task/{id}")
+    public final String taskEditPage(@PathVariable Integer id, Model model){
+        LOGGER.debug("taskEditPage ({} {})", id, model);
+        Optional<Task> optionalTask = taskService.findById(id);
+        if (optionalTask.isPresent()){
+            model.addAttribute("isNew", false);
+            model.addAttribute("task", optionalTask.get());
+            model.addAttribute("folders", folderDtoService.findAllWithTaskCount() );
+            return "task";
+        }
+            else {
+            // TODO folder not found - pass error message as parameter or handle not found error
+            return "redirect:/tasks";
+        }
     }
 
 }
