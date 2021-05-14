@@ -1,5 +1,6 @@
 package com.smachek.stasklist.web_app;
 
+import com.smachek.model.Folder;
 import com.smachek.model.Task;
 import com.smachek.service.FolderDtoService;
 import com.smachek.service.TaskService;
@@ -60,10 +61,17 @@ public class TaskController {
             model.addAttribute("folders", folderDtoService.findAllWithTaskCount() );
             return "task";
         }
-            else {
+        else {
             // TODO folder not found - pass error message as parameter or handle not found error
             return "redirect:/tasks";
         }
+    }
+
+    @PostMapping(value = "/task/{id}")
+    public final String taskEdit(Task task){
+        LOGGER.debug("taskEdit({})", task);
+        taskService.update(task);
+        return "redirect:/tasks";
     }
 
 }

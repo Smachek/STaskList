@@ -48,8 +48,8 @@ public class TaskDaoJdbcIT {
 
     @Test
     public void findByIdExceptionalTest(){
-        Assertions.assertThrows(EmptyResultDataAccessException.class,
-                () -> taskDao.findById(999).get());
+        Optional<Task> optionalTask = taskDao.findById(999);
+        Assertions.assertTrue (optionalTask.isEmpty());
     }
 
     @Test

@@ -22,11 +22,12 @@ import org.springframework.web.context.WebApplicationContext;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Optional;
 
 import static com.smachek.model.constants.TaskConstants.*;
 import static org.hamcrest.Matchers.*;
 import static org.hamcrest.Matchers.comparesEqualTo;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @ExtendWith(SpringExtension.class)
@@ -174,55 +175,46 @@ public class TaskControllerIT {
                 .andExpect(model().attribute("task", hasProperty("createDate", comparesEqualTo(taskCreateDate))))
                 .andExpect(model().attribute("task", hasProperty("doneMark", is(false))));
     }
-/*
+
     @Test
     public void shouldRedirectToTaskPageIfTaskNotFoundById() throws Exception {
         mockMvc.perform(
                 MockMvcRequestBuilders.get("/task/999")
         ).andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().isFound())
-                .andExpect(MockMvcResultMatchers.redirectedUrl("tasks"));
+                .andExpect(MockMvcResultMatchers.redirectedUrl("/tasks"));
     }
 
     @Test
     public void shouldUpdateTaskAfterEdit() throws Exception {
-        String testName = RandomStringUtils.randomAlphabetic(FOLDER_NAME_SIZE);
-        String testDescription = RandomStringUtils.randomAlphabetic(FOLDER_DESCRIPTION_SIZE);
+        String testName = RandomStringUtils.randomAlphabetic(TASK_NAME_SIZE);
+        String testDescription = RandomStringUtils.randomAlphabetic(TASK_DESCRIPTION_SIZE);
+        Date taskStartDate = new SimpleDateFormat("yyyy/MM/dd").parse("2021/05/01");
+        Date taskDueDate = new SimpleDateFormat("yyyy/MM/dd").parse("2021/05/08");
         mockMvc.perform(
                 MockMvcRequestBuilders.post("/task/1")
                         .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                         .param("idTask", "1")
+                        .param("idFolder", "0")
                         .param("nameTask", testName)
                         .param("description", testDescription)
+                        .param("priority", "1")
+                        .param("startDate", "2021/05/01")
+                        .param("dueDate", "2021/05/08")
         ).andExpect(status().isFound())
                 .andExpect(view().name("redirect:/tasks"))
                 .andExpect(redirectedUrl("/tasks"));
 
         Optional<Task> optionalTask = taskService.findById (1);
         assertTrue(optionalTask.isPresent());
+        assertEquals(0, optionalTask.get().getIdFolder());
         assertEquals(testName, optionalTask.get().getNameTask());
         assertEquals(testDescription, optionalTask.get().getDescription());
+        assertEquals(1, optionalTask.get().getPriority());
+        assertEquals(taskStartDate, optionalTask.get().getStartDate());
+        assertEquals(taskDueDate, optionalTask.get().getDueDate());
     }
-
-    @Test
-    public void shouldUpdateTaskDescriptionWithSameNameAfterEdit() throws Exception {
-        String testDescription = RandomStringUtils.randomAlphabetic(FOLDER_DESCRIPTION_SIZE);
-        String testNameTask = taskService.findById (1).get().getNameTask();
-
-        mockMvc.perform(
-                MockMvcRequestBuilders.post("/task/1")
-                        .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-                        .param("idTask", "1")
-                        .param("nameTask", testNameTask)
-                        .param("description", testDescription)
-        ).andExpect(status().isFound())
-                .andExpect(view().name("redirect:/tasks"))
-                .andExpect(redirectedUrl("/tasks"));
-
-        Optional<Task> optionalTask = taskService.findById (1);
-        assertEquals(testDescription, optionalTask.get().getDescription());
-    }
-
+/*
     @Test
     public void shouldDeleteTask() throws Exception {
         Integer countBefore = taskService.count();

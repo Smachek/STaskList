@@ -63,7 +63,7 @@ public class FolderController {
         }
         else {
             // TODO folder not found - pass error message as parameter or handle not found error
-            return "redirect:folders";
+            return "redirect:/folders";
         }
     }
 

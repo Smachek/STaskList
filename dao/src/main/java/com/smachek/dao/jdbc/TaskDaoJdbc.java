@@ -3,6 +3,7 @@ package com.smachek.dao.jdbc;
 import com.smachek.dao.TaskDao;
 import com.smachek.model.Task;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -51,7 +52,8 @@ public class TaskDaoJdbc implements TaskDao {
     @Override
     public Optional<Task> findById(Integer idTask) {
         SqlParameterSource sqlParameterSource = new MapSqlParameterSource("in_ID_TASK", idTask);
-        return Optional.ofNullable((Task) namedParameterJdbcTemplate.queryForObject(getByIdSql, sqlParameterSource, rowMapper));
+        List<Task> results = namedParameterJdbcTemplate.query(getByIdSql, sqlParameterSource, rowMapper);
+        return Optional.ofNullable(DataAccessUtils.uniqueResult(results) );
     }
 
     @Override
