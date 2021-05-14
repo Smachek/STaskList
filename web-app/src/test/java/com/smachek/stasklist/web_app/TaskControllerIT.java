@@ -214,12 +214,12 @@ public class TaskControllerIT {
         assertEquals(taskStartDate, optionalTask.get().getStartDate());
         assertEquals(taskDueDate, optionalTask.get().getDueDate());
     }
-/*
+
     @Test
     public void shouldDeleteTask() throws Exception {
         Integer countBefore = taskService.count();
         mockMvc.perform(
-                MockMvcRequestBuilders.get("/task/1/delete")
+                MockMvcRequestBuilders.get("/task/2/delete")
         ).andExpect(status().isFound())
                 .andExpect(view().name("redirect:/tasks"))
                 .andExpect(redirectedUrl("/tasks"));
@@ -228,5 +228,4 @@ public class TaskControllerIT {
         assertEquals(countBefore - 1, countAfter);
     }
 
- */
 }

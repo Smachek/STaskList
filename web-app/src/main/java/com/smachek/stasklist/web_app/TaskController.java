@@ -74,4 +74,11 @@ public class TaskController {
         return "redirect:/tasks";
     }
 
+    @GetMapping(value = "/task/{id}/delete")
+    public final String taskDeleteById(@PathVariable Integer id){
+        LOGGER.debug("taskDeleteById({})", id);
+        taskService.delete(id);
+        return "redirect:/tasks";
+    }
+
 }
