@@ -25,6 +25,9 @@ public class TaskDaoJdbc implements TaskDao {
     @Value("${task.getById}")
     private String getByIdSql;
 
+    @Value("${task.getByIdFolder}")
+    private String getByIdFolderSql;
+
     @Value("${task.create}")
     private String createSql;
 
@@ -54,6 +57,12 @@ public class TaskDaoJdbc implements TaskDao {
         SqlParameterSource sqlParameterSource = new MapSqlParameterSource("in_ID_TASK", idTask);
         List<Task> results = namedParameterJdbcTemplate.query(getByIdSql, sqlParameterSource, rowMapper);
         return Optional.ofNullable(DataAccessUtils.uniqueResult(results) );
+    }
+
+    @Override
+    public List<Task> findByFolder(Integer idFolder) {
+        SqlParameterSource sqlParameterSource = new MapSqlParameterSource("in_ID_FOLDER", idFolder);
+        return namedParameterJdbcTemplate.query(getByIdFolderSql, sqlParameterSource, rowMapper);
     }
 
     @Override

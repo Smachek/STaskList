@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Optional;
 
@@ -28,10 +29,18 @@ public class TaskController {
     }
 
     @GetMapping(value = "/tasks")
-    public final String tasks(Model model){
-        LOGGER.debug("tasks()");
-        model.addAttribute("tasks", taskService.findAll());
+    public final String tasks(@RequestParam(required = false) Integer folder, Model model){
+        LOGGER.debug("tasks({} {})", folder, model);
+        if (folder == null) {
+            model.addAttribute("tasks", taskService.findAll());
+        }
+        else {
+            model.addAttribute("tasks", taskService.findByFolder(folder));
+        }
         model.addAttribute("folders", folderDtoService.findAllWithTaskCount());
+        Task task = new Task();
+        task.setIdFolder(0);
+        model.addAttribute("task", task);
         return "tasks";
     }
 

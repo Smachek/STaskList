@@ -7,10 +7,13 @@ import java.util.Optional;
 
 public interface TaskDao {
     List<Task> findAll();
+    List<Task> findByFolder(Integer idFolder);
     Optional<Task> findById(Integer idTask);
     Integer create (Task task);
     Integer update (Task task);
     Integer delete (Integer idTask);
 
     Integer count();
+
+
 }

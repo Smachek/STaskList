@@ -27,6 +27,11 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
+    public List<Task> findByFolder(Integer idFolder) {
+        return taskDao.findByFolder(idFolder);
+    }
+
+    @Override
     public Optional<Task> findById(Integer id) {
         return taskDao.findById(id);
     }
