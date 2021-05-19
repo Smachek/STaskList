@@ -28,6 +28,9 @@ public class TaskDaoJdbc implements TaskDao {
     @Value("${task.getByIdFolder}")
     private String getByIdFolderSql;
 
+    @Value("${task.searchByText}")
+    private String searchByTextSql;
+
     @Value("${task.create}")
     private String createSql;
 
@@ -63,6 +66,13 @@ public class TaskDaoJdbc implements TaskDao {
     public List<Task> findByFolder(Integer idFolder) {
         SqlParameterSource sqlParameterSource = new MapSqlParameterSource("in_ID_FOLDER", idFolder);
         return namedParameterJdbcTemplate.query(getByIdFolderSql, sqlParameterSource, rowMapper);
+    }
+
+    @Override
+    public List<Task> findText(String search) {
+        String searchLike= "%" + search.trim() + "%";
+        SqlParameterSource sqlParameterSource = new MapSqlParameterSource("in_SEARCH_TEXT", searchLike);
+        return namedParameterJdbcTemplate.query(searchByTextSql, sqlParameterSource, rowMapper);
     }
 
     @Override

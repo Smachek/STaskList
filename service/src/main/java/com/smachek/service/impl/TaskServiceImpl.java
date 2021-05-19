@@ -32,6 +32,11 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
+    public List<Task> findText(String search) {
+        return taskDao.findText(search);
+    }
+
+    @Override
     public Optional<Task> findById(Integer id) {
         return taskDao.findById(id);
     }

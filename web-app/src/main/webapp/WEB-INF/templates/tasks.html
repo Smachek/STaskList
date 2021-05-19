@@ -37,8 +37,12 @@
         >about</a>
       </li>   
     </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+    <form class="form-inline my-2 my-lg-0"
+          id = "taskFormSearch"
+          action="tasks.html"
+          th:action="@{/tasks}"
+          th:method="@{get}">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search" id="search">
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form>
   </div>
@@ -233,11 +237,6 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 
 <script>
-  $('.list-group-item').click(function(e) {
-    //e.preventDefault();
-    $(this).addClass('active').siblings().removeClass('active');
-
-  });
   $(function(){
     $('.list-group-item').each(function(){
       if ($(this).attr("href") == window.location.pathname + window.location.search){

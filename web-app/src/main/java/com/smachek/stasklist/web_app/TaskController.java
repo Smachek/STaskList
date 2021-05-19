@@ -29,13 +29,17 @@ public class TaskController {
     }
 
     @GetMapping(value = "/tasks")
-    public final String tasks(@RequestParam(required = false) Integer folder, Model model){
-        LOGGER.debug("tasks({} {})", folder, model);
-        if (folder == null) {
-            model.addAttribute("tasks", taskService.findAll());
+    public final String tasks(@RequestParam(required = false) Integer folder,
+                              @RequestParam(required = false) String search,
+                              Model model){
+        LOGGER.debug("tasks({} {} {})", folder, search, model);
+        if (folder != null) {
+            model.addAttribute("tasks", taskService.findByFolder(folder));
+        } else if (search != null) {
+            model.addAttribute("tasks", taskService.findText(search));
         }
         else {
-            model.addAttribute("tasks", taskService.findByFolder(folder));
+            model.addAttribute("tasks", taskService.findAll());
         }
         model.addAttribute("folders", folderDtoService.findAllWithTaskCount());
         Task task = new Task();
