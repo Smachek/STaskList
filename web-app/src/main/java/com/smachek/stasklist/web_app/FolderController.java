@@ -59,6 +59,7 @@ public class FolderController {
         if (optionalFolder.isPresent()) {
             model.addAttribute("isNew", false);
             model.addAttribute("folder", optionalFolder.get());
+            model.addAttribute("haveTasks", folderService.countTasks(id) > 0);
             return "folder";
         }
         else {

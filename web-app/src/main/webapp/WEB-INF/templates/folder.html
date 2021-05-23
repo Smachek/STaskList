@@ -102,12 +102,12 @@
                                         class="btn btn-outline-primary">
                                         Cancel</a>
                                 </div>
-                                <div class="col">
+                                <div th:remove="${isNew} ? 'all' "  class="col">
                                     <a href="#"
                                         class="btn btn-outline-primary float-right"
                                         data-toggle="modal" 
                                         data-target="#deleteDialog"
-                                        th:attr="data-id=${folder.idFolder}">
+                                        th:attr="data-id=${folder.idFolder}, data-havetasks=${haveTasks}">
                                     <i class="d-none d-sm-inline fas fa-trash"></i> Delete</a>
                                 </div>
                             </div>
@@ -130,17 +130,17 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header alert-danger">
-                <h2 class="modal-title" id="exampleModalLabel">Delete folder?</h2>
+                <h2 class="modal-title" id="exampleModalLabel">Delete folder</h2>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                This is permanently delete folder.
+            <div class="modal-body"
+                 th:text="${haveTasks} ? 'The folder cannot be deleted because it has tasks.' : 'This is permanently delete folder.'">
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                <a id="deleteUrl" href="#" class="btn btn-danger">Delete</a>
+                <a th:if="${not haveTasks}" id="deleteUrl" href="#" class="btn btn-danger">Delete</a>
             </div>
         </div>
     </div>
@@ -160,7 +160,10 @@
 <script>
     $('#deleteDialog').on('show.bs.modal', function (event) {
         var id = $(event.relatedTarget).data('id')
-        document.getElementById('deleteUrl').href = '/folder/' + id + '/delete'
+        var haveTasks = $(event.relatedTarget).data('havetasks')
+        if (! haveTasks) {
+            document.getElementById('deleteUrl').href = '/folder/' + id + '/delete'
+        }
     });
 </script>
 

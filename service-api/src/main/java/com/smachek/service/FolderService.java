@@ -13,5 +13,6 @@ public interface FolderService {
     Integer delete (Integer idFolder);
 
     Integer count();
+    Integer countTasks(Integer idFolder);
 }
 

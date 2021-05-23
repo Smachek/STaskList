@@ -40,6 +40,9 @@ public class FolderDaoJdbc implements FolderDao {
     @Value("${folder.count}")
     private String countSql;
 
+    @Value("${folder.countTasks}")
+    private String countTasksSql;
+
     NamedParameterJdbcTemplate namedParameterJdbcTemplate;
     RowMapper rowMapper = BeanPropertyRowMapper.newInstance(Folder.class);
 
@@ -98,5 +101,11 @@ public class FolderDaoJdbc implements FolderDao {
     @Override
     public Integer count() {
         return namedParameterJdbcTemplate.queryForObject(countSql, new HashMap<>(), Integer.class);
+    }
+
+    @Override
+    public Integer countTasks(Integer idFolder) {
+        SqlParameterSource sqlParameterSource = new MapSqlParameterSource("in_ID_FOLDER", idFolder);
+        return namedParameterJdbcTemplate.queryForObject(countTasksSql, sqlParameterSource, Integer.class);
     }
 }

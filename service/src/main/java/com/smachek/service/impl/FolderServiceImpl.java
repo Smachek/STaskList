@@ -52,4 +52,9 @@ public class FolderServiceImpl implements FolderService {
     public Integer count() {
         return folderDao.count();
     }
+
+    @Override
+    public Integer countTasks(Integer idFolder) {
+        return folderDao.countTasks(idFolder);
+    }
 }
