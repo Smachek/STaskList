@@ -1,4 +1,7 @@
 # STaskList
+
+[![Java CI with Maven](https://github.com/Smachek/STaskList/actions/workflows/maven.yml/badge.svg)](https://github.com/Smachek/STaskList/actions/workflows/maven.yml)
+
 The "STaskList" is a learning web-app application for managing tasks.
 It consists from two main entities "Folders" and "Tasks". 
 Folder can include several tasks. Task describes some activity to do.
