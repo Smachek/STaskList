@@ -48,9 +48,10 @@ public class TaskControllerIT {
         mockMvc = MockMvcBuilders.webAppContextSetup(wac).build();
     }
 
+    @SuppressWarnings({"unchecked"})
     @Test
     public void shouldReturnTasksPage() throws Exception {
-        Date createDate = new SimpleDateFormat("yyyy-MM-dd").parse("2020-09-01");  ;
+        Date createDate = new SimpleDateFormat("yyyy-MM-dd").parse("2020-09-01");
         mockMvc.perform(
                 MockMvcRequestBuilders.get("/tasks")
         ).andDo(MockMvcResultHandlers.print())

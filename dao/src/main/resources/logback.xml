@@ -12,7 +12,7 @@
         </encoder>
     </appender>
 
-    <logger name="com.smachek" level="DEBUG">
+    <logger name="com.smachek" level="WARN">
         <appender-ref ref="STDOUT"/>
     </logger>
 

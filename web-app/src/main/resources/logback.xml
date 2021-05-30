@@ -5,7 +5,7 @@
         </encoder>
     </appender>
 
-    <root name="com.smachek" level="DEBUG">
+    <root name="com.smachek" level="WARN">
         <appender-ref ref="STDOUT"/>
     </root>
 </configuration>
