@@ -125,7 +125,7 @@
 </footer>
 
 <!-- Modal - Confirm delete  -->
-<div class="modal fade" id="deleteDialog" tabindex="-1" role="dialog"
+<div th:remove="${isNew} ? 'all' " class="modal fade" id="deleteDialog" tabindex="-1" role="dialog"
      aria-labelledby="ConfirmDeleteModal" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
