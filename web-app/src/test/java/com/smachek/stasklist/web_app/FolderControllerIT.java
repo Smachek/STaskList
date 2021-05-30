@@ -147,7 +147,7 @@ class FolderControllerIT {
                 MockMvcRequestBuilders.get("/folder/999")
         ).andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().isFound())
-                .andExpect(MockMvcResultMatchers.redirectedUrl("folders"));
+                .andExpect(MockMvcResultMatchers.redirectedUrl("/folders"));
     }
 
     @Test
