@@ -8,7 +8,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
@@ -17,7 +16,7 @@ import java.util.Optional;
 
 
 @ExtendWith(SpringExtension.class)
-@ContextConfiguration(locations = {"classpath*:test-db.xml", "classpath*:test-dao.xml", "classpath*:dao.xml"})
+@ContextConfiguration(classes = {DaoConfiguration.class, TestDaoConfiguration.class})
 public class FolderDaoJdbcIT {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(FolderDaoJdbcIT.class);

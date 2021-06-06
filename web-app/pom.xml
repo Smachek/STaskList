@@ -119,6 +119,12 @@
 
     <build>
         <plugins>
+            <plugin>
+                <artifactId>maven-war-plugin</artifactId>
+                <configuration>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                </configuration>
+            </plugin>
             <!-- Jetty  -->
             <plugin>
                 <groupId>org.eclipse.jetty</groupId>
