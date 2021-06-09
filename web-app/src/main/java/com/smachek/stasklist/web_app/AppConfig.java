@@ -15,6 +15,8 @@ import com.smachek.service.impl.TaskServiceImpl;
 import com.smachek.stasklist.testdb.TestDbConfiguration;
 import org.springframework.context.annotation.*;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -32,7 +34,8 @@ import javax.sql.DataSource;
 public class AppConfig implements WebMvcConfigurer {
 
     public void addResourceHandlers(final ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
+        registry.addResourceHandler("/resources/**")
+                .addResourceLocations("/resources/");
     }
 
     @Bean
@@ -100,5 +103,13 @@ public class AppConfig implements WebMvcConfigurer {
         viewResolver.setViewNames(new String[] {"*"});
         viewResolver.setCharacterEncoding("UTF-8");
         return viewResolver;
+    }
+
+    @Controller
+    static class FaviconController {
+        @RequestMapping("favicon.ico")
+        String favicon() {
+            return "forward:/resources/static/img/favicon.ico";
+        }
     }
 }
