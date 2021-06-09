@@ -18,7 +18,7 @@ import java.time.LocalDate;
 import java.util.*;
 
 @ExtendWith(SpringExtension.class)
-@ContextConfiguration(locations = {"classpath*:test-db.xml", "classpath*:test-dao.xml", "classpath*:dao.xml"})
+@ContextConfiguration(classes = {DaoConfiguration.class, TestDaoConfiguration.class})
 public class TaskDaoJdbcIT {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(TaskDaoJdbcIT.class);
