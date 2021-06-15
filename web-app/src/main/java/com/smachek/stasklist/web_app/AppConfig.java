@@ -27,16 +27,10 @@ import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 import javax.sql.DataSource;
 
 @Configuration
-@EnableWebMvc
 @ComponentScan(basePackages = "com.smachek.*")
 @Import(TestDbConfiguration.class)
 @PropertySource({"classpath:dao.properties","classpath:application.properties"})
 public class AppConfig implements WebMvcConfigurer {
-
-    public void addResourceHandlers(final ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/resources/**")
-                .addResourceLocations("/resources/");
-    }
 
     @Bean
     public NamedParameterJdbcTemplate namedParameterJdbcTemplate(DataSource dataSource){
@@ -73,43 +67,11 @@ public class AppConfig implements WebMvcConfigurer {
         return new TaskServiceImpl(taskDao);
     }
 
-    // Thymeleaf
-    @Bean
-    public SpringResourceTemplateResolver templateResolver(){
-        SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
-        //templateResolver.setApplicationContext(this.applicationContext);
-        templateResolver.setPrefix("/WEB-INF/templates/");
-        templateResolver.setSuffix(".html");
-        // Template cache is true by default. Set to false if you want
-        // templates to be automatically updated when modified.
-        templateResolver.setCacheable(false);
-        return templateResolver;
-    }
-
-    @Bean
-    public SpringTemplateEngine templateEngine(){
-        SpringTemplateEngine templateEngine = new SpringTemplateEngine();
-        templateEngine.setTemplateResolver(templateResolver());
-        templateEngine.setEnableSpringELCompiler(true);
-        return templateEngine;
-    }
-
-    @Bean
-    public ThymeleafViewResolver viewResolver(){
-        ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
-        viewResolver.setTemplateEngine(templateEngine());
-        // NOTE 'order' and 'viewNames' are optional
-        viewResolver.setOrder(1);
-        viewResolver.setViewNames(new String[] {"*"});
-        viewResolver.setCharacterEncoding("UTF-8");
-        return viewResolver;
-    }
-
     @Controller
     static class FaviconController {
         @RequestMapping("favicon.ico")
         String favicon() {
-            return "forward:/resources/static/img/favicon.ico";
+            return "forward:/img/favicon.ico";
         }
     }
 }
