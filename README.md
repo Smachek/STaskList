@@ -21,6 +21,7 @@ General characteristics of the application:
 
 - Java 8
 - Spring 5 (Core, MVC, Test)
+- Spring Boot 2.5
 - JUnit 5
 - Logback 1.2.3
 - Maven 3.6.3
@@ -44,8 +45,9 @@ mvn clean istall
 ### Run
 
 For run application invoke shell command
+from `web-app` folder
 ```shell
-mvn jetty:run
+mvn spring-boot:run
 ```
 Open application in browser by address `http://localhost:8080`
 
