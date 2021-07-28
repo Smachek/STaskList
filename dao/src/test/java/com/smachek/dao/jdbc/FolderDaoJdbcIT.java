@@ -2,21 +2,28 @@ package com.smachek.dao.jdbc;
 
 import com.smachek.dao.FolderDao;
 import com.smachek.model.Folder;
+import com.smachek.stasklist.testdb.TestDbConfiguration;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.data.jdbc.DataJdbcTest;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.List;
 import java.util.Optional;
 
 
-@ExtendWith(SpringExtension.class)
-@ContextConfiguration(classes = {DaoConfiguration.class, TestDaoConfiguration.class})
+@DataJdbcTest
+@Import({FolderDaoJdbc.class})
+@PropertySource({"classpath:dao.properties"})
+@ContextConfiguration(classes = TestDbConfiguration.class)
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+
 public class FolderDaoJdbcIT {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(FolderDaoJdbcIT.class);
