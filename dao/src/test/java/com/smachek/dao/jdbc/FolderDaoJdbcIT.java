@@ -9,15 +9,21 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.jdbc.DataJdbcTest;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.test.context.ContextConfiguration;
 
 import java.util.List;
 import java.util.Optional;
 
 
-//@ExtendWith(SpringExtension.class)
 @DataJdbcTest
-@ContextConfiguration(classes = {TestDbConfiguration.class}) //DaoConfiguration.class, TestDaoConfiguration.class
+@Import({FolderDaoJdbc.class})
+@PropertySource({"classpath:dao.properties"})
+@ContextConfiguration(classes = TestDbConfiguration.class)
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+
 public class FolderDaoJdbcIT {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(FolderDaoJdbcIT.class);

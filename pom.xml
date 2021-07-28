@@ -29,7 +29,7 @@
     <name>STaskList Main Project</name>
 
     <properties>
-        <java.version>1.8</java.version>
+        <java.version>11</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.test.result.directory>${project.build.directory}/testResult</project.test.result.directory>
         <junit.unitTest.directory>${project.test.result.directory}/unit</junit.unitTest.directory>
